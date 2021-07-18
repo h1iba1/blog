@@ -1,0 +1,446 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light /dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>信息收集 | h11ba1's blog</title><meta name="keywords" content="信息收集"><meta name="author" content="h11ba1"><meta name="copyright" content="h11ba1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在拿到一个域名资产的时候首先要做的就是信息收集。毕竟大师傅们都说，渗透测试的本质是信息收集。 1. whois查询whois查询在对中小网站进行测试时很有用。通过whois查询可以知道域名注册人信息和注册邮箱。 对自己域名查询一下： 1.1 在线查询这里使用爱站在线查询：http:&#x2F;&#x2F;whois.chinaz.com&#x2F;  淦！真实姓名和部分邮箱都暴露了 whois在线查询网站： http:&#x2F;&#x2F;wh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息收集">
+<meta property="og:url" content="http://example.com/2019/07/05/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.html">
+<meta property="og:site_name" content="h11ba1&#39;s blog">
+<meta property="og:description" content="在拿到一个域名资产的时候首先要做的就是信息收集。毕竟大师傅们都说，渗透测试的本质是信息收集。 1. whois查询whois查询在对中小网站进行测试时很有用。通过whois查询可以知道域名注册人信息和注册邮箱。 对自己域名查询一下： 1.1 在线查询这里使用爱站在线查询：http:&#x2F;&#x2F;whois.chinaz.com&#x2F;  淦！真实姓名和部分邮箱都暴露了 whois在线查询网站： http:&#x2F;&#x2F;wh">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2019/07/05/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.png">
+<meta property="article:published_time" content="2019-07-05T13:04:49.000Z">
+<meta property="article:modified_time" content="2021-07-18T11:37:07.981Z">
+<meta property="article:author" content="h11ba1">
+<meta property="article:tag" content="信息收集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/07/05/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/07/05/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '信息收集',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-18 19:37:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="h11ba1's blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></li><li><a class="site-page child" href="/bangumis"><i class="fa-fw bangumis"></i><span> 番剧</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2019/07/05/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">h11ba1's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></li><li><a class="site-page child" href="/bangumis"><i class="fa-fw bangumis"></i><span> 番剧</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">信息收集</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-07-05T13:04:49.000Z" title="发表于 2019-07-05 21:04:49">2019-07-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-18T11:37:07.981Z" title="更新于 2021-07-18 19:37:07">2021-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="信息收集"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>在拿到一个域名资产的时候首先要做的就是信息收集。毕竟大师傅们都说，渗透测试的本质是信息收集。</p>
+<h1 id="1-whois查询"><a href="#1-whois查询" class="headerlink" title="1. whois查询"></a>1. whois查询</h1><p>whois查询在对中小网站进行测试时很有用。通过whois查询可以知道域名注册人信息和注册邮箱。</p>
+<p>对自己域名查询一下：</p>
+<h3 id="1-1-在线查询"><a href="#1-1-在线查询" class="headerlink" title="1.1 在线查询"></a>1.1 在线查询</h3><p>这里使用爱站在线查询：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></p>
+<p><img src="1.1.1.png" alt="1.1"></p>
+<p>淦！真实姓名和部分邮箱都暴露了</p>
+<p>whois在线查询网站：</p>
+<p><a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></p>
+<p>（下面五个网站，连我完整qq都查出来了，恐怖如斯）</p>
+<p><a target="_blank" rel="noopener" href="http://whois.nawang.cn/">http://whois.nawang.cn/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zzy.cn/domain/whois.html">https://www.zzy.cn/domain/whois.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.dns.com.cn/show/domain/whois/index.do">http://www.dns.com.cn/show/domain/whois/index.do</a></p>
+<p><a target="_blank" rel="noopener" href="https://whois.cndns.com/">https://whois.cndns.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://whois.ename.net/">https://whois.ename.net/</a></p>
+<p>更多在线查询网站：</p>
+<p>西部数码域名WHOIS信息查询地址：<a target="_blank" rel="noopener" href="https://whois.west.cn/">https://whois.west.cn/</a></p>
+<p>新网域名WHOIS信息查询地址：<a target="_blank" rel="noopener" href="http://whois.xinnet.com/domain/whois/index.jsp">http://whois.xinnet.com/domain/whois/index.jsp</a></p>
+<p>中资源域名WHOIS信息查询地址：<a target="_blank" rel="noopener" href="https://www.zzy.cn/domain/whois.html">https://www.zzy.cn/domain/whois.html</a></p>
+<p>三五互联域名WHOIS信息查询地址：<a target="_blank" rel="noopener" href="https://cp.35.com/chinese/whois.php">https://cp.35.com/chinese/whois.php</a></p>
+<p>爱名网域名WHOIS信息查询地址：<a target="_blank" rel="noopener" href="https://www.22.cn/domain/">https://www.22.cn/domain/</a></p>
+<p>一个网站查不出来的时候，多试几个总没坏处，万一呢</p>
+<h3 id="1-2-工具查询"><a href="#1-2-工具查询" class="headerlink" title="1.2 工具查询"></a>1.2 工具查询</h3><p>工具查询可以使用kali自带的whois查询工具</p>
+<p><img src="1.1.2.png" alt="1.1.2"></p>
+<h3 id="1-3-收集信息的利用"><a href="#1-3-收集信息的利用" class="headerlink" title="1.3 收集信息的利用"></a>1.3 收集信息的利用</h3><p>讲了这么多，最终还是要把收集的信息利用起来。根据whois对域名的查询。现在我们已经知道了以下信息</p>
+<ul>
+<li>域名注册者（一般就是站长）姓名</li>
+<li>域名注册者邮箱</li>
+<li>域名注册商</li>
+<li>域名注册时间</li>
+</ul>
+<p>知道域名注册者姓名，注册者邮箱和域名注册时间。我们就可以根据这些信息制作用户名，密码爆破字典。</p>
+<p>特别是这里还使用了qq邮箱，那么可以直接添加qq好友，进行社会工程学攻击。</p>
+<p><strong>这里简单演示一下密码爆破字典的制作：</strong></p>
+<p>为了获取更多信息，可以直接添加qq，套出更多信息。这里只简单添加好友获取一下受害者的出生日期。</p>
+<p>很多人的密码组合都是用户名+出生日期。</p>
+<p><img src="1.3.1.jpg" alt="1.3.1"></p>
+<p>那么现在我们已经知道了受害者的，姓名，邮箱，出生日期。这是就可以使用社工工具生成密码字典</p>
+<p>这里使用pydictor （这个工具除了，生成密码字典，还有很多实用的功能，如合并去重，批量添加指定前缀…等等)</p>
+<p>github地址：<a target="_blank" rel="noopener" href="https://github.com/LandGrey/pydictor/blob/master/README_CN.md">https://github.com/LandGrey/pydictor/blob/master/README_CN.md</a></p>
+<p>python3运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python pydictor --sedb</span><br><span class="line"></span><br><span class="line">set cname zhuxiang</span><br><span class="line">set sname xiang zhu</span><br><span class="line">set birth 19990312</span><br><span class="line">set nickname h11ba1</span><br><span class="line">set email 1406249263@qq.com</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="1.1.3.png" alt="1.1.3"></p>
+<p>密码生成到了results文件夹里面</p>
+<p><img src="1.1.4.png" alt="1.1.4"></p>
+<p>最终在其中找到了以前用的密码…..</p>
+<h1 id="2-子域名收集"><a href="#2-子域名收集" class="headerlink" title="2.子域名收集"></a>2.子域名收集</h1><p>子域名的收集可以在主站(www开头，如<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>) 难以攻破的情况下，找寻更多的攻击面</p>
+<p>子域名常用收集方法：</p>
+<ul>
+<li>工具收集</li>
+<li>google语法收集</li>
+<li>fofa收集</li>
+</ul>
+<h3 id="2-1工具收集"><a href="#2-1工具收集" class="headerlink" title="2.1工具收集"></a>2.1工具收集</h3><p>比较常用的收集工具是：</p>
+<p>oneforall : <a target="_blank" rel="noopener" href="https://github.com/shmilylty/OneForAll">https://github.com/shmilylty/OneForAll</a></p>
+<p>subDomain : <a target="_blank" rel="noopener" href="https://github.com/lijiejie/subDomainsBrute">https://github.com/lijiejie/subDomainsBrute</a></p>
+<p>layer子域名挖掘机：这个网上搜索一下有，或者找我要（总感觉小网站下载的东西都有后门）</p>
+<p><strong>oneforall：</strong></p>
+<p>个人比较习惯使用搭建在服务器上面的dokcer版</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 拉去docker 镜像</span><br><span class="line">docker pull shmilylty/oneforall</span><br><span class="line"></span><br><span class="line">//使用时启动镜像</span><br><span class="line">docker run -it shmilylty/oneforall</span><br><span class="line"></span><br><span class="line">//收集子域名</span><br><span class="line">python oneforall.py --target baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>在自己电脑上安装使用也很不错，个人习惯问题~</p>
+<p><strong>subDomain：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 subDomainsBrute.py baidu.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="1.2.2.png" alt="1.2.2"></p>
+<h3 id="2-2-搜索引擎语法搜索子域名"><a href="#2-2-搜索引擎语法搜索子域名" class="headerlink" title="2.2 搜索引擎语法搜索子域名"></a>2.2 搜索引擎语法搜索子域名</h3><p>google 语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:&quot;baidu.com&quot; -www</span><br></pre></td></tr></table></figure>
+
+<p><img src="2.2.1.png" alt="2.2.1"></p>
+<p>百度语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:bilibili.com link:bilibili.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="2.2.2.png" alt="2.2.2"></p>
+<p>必应语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:baidu.com</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="2.2.3.png" alt="2.2.3"></p>
+<h3 id="2-3-空间搜索引擎搜索"><a href="#2-3-空间搜索引擎搜索" class="headerlink" title="2.3 空间搜索引擎搜索"></a>2.3 空间搜索引擎搜索</h3><p>fofa搜索子域名：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">domain=&quot;qq.com&quot; </span><br></pre></td></tr></table></figure>
+
+<p><img src="2.3.1.png" alt="2.3.1"></p>
+<p>添加<code>&amp;&amp;header=200</code>可以过滤404子域网站。</p>
+<p>其他的空间搜索引擎还有shodan,zoomeye，和安恒的sumap</p>
+<h3 id="2-4-收集子域名的利用"><a href="#2-4-收集子域名的利用" class="headerlink" title="2.4 收集子域名的利用"></a>2.4 收集子域名的利用</h3><p><strong>子域名去重：</strong></p>
+<p>因为我们使用了多个工具收集子域名，收集的信息肯定会有很多重复之处，此时可以使用pydictor这个工具去重</p>
+<p>将所有需要合并去重的txt文件放到test目录下，执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python pydictor.py -tool uniqbiner .\test\</span><br></pre></td></tr></table></figure>
+
+<p><img src="2.4.1.png" alt="2.4.1"></p>
+<p>最终在results目录下即可找到合并去重的文件内容。输出位置也可以使用 -o 指定</p>
+<p><strong>子域名批量识别：</strong></p>
+<p>收集到的子域名，在大型站点中通常会很多，一个一个检测太过麻烦，比较优雅的方法是，使用工具批量识别title头，或者根据子域名名称来判断站点重要性。如（vpn，login，email等子域名一眼看过去就感觉很有价值）</p>
+<p>批量识别工具：<a target="_blank" rel="noopener" href="https://github.com/TheKingOfDuck/domain_screen">https://github.com/TheKingOfDuck/domain_screen</a></p>
+<p>工具有点问题，后面修一下。</p>
+<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h3><p>批量识别title信息：</p>
+<p><a target="_blank" rel="noopener" href="http://www.link114.cn/title">http://www.link114.cn/title</a></p>
+<p>批量识别ip及运营商：</p>
+<p><a target="_blank" rel="noopener" href="https://zh.infobyip.com/ipbulklookup.php">https://zh.infobyip.com/ipbulklookup.php</a></p>
+<h1 id="3-真实ip发现"><a href="#3-真实ip发现" class="headerlink" title="3. 真实ip发现"></a>3. 真实ip发现</h1><p>目前很多大型网站都使用了cdn服务，这就导致直接ping域名得到的ip可能不是真实ip。</p>
+<p>cdn本身不是为了安全防御，但在一定程度上能够抵御安全攻击。因为直接访问的是cdn服务器，sql注入，命令执行之类的漏洞都是在cdn服务器上面执行，但是cdn服务器只是缓存了静态资源，并没有漏洞程序，所以在对具有cdn的服务器进行攻击时，漏洞可能无法利用成功。（个人理解，这方面一直不太熟，后面研究研究）</p>
+<h3 id="TODO-1"><a href="#TODO-1" class="headerlink" title="TODO"></a>TODO</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/BKR8mpxMSOwPhkkdB8Cqsg"><strong>最后的Bypass CDN 查找网站真实IP</strong></a></p>
+<p>这篇文章说的 很不错，推荐看一下</p>
+<h1 id="4-cms，中间件信息收集"><a href="#4-cms，中间件信息收集" class="headerlink" title="4. cms，中间件信息收集"></a>4. cms，中间件信息收集</h1><p>在渗透测试时，如果能够快速识别出cms和中间件信息，能够直接秒杀。</p>
+<p>常规cms识别的方法：</p>
+<ul>
+<li>云悉识别 </li>
+<li>wappalyzer 插件</li>
+<li>佩恩平台识别</li>
+<li>潮汐指纹识别</li>
+<li>kali whatweb</li>
+</ul>
+<h3 id="4-1-云悉指纹识别"><a href="#4-1-云悉指纹识别" class="headerlink" title="4.1.云悉指纹识别"></a>4.1.云悉指纹识别</h3><p>最好用的应该是云悉平台的指纹识别，但是云悉平台需要邀请码….邀请码有点难弄到</p>
+<p><a target="_blank" rel="noopener" href="https://www.yunsee.cn/">https://www.yunsee.cn/</a></p>
+<p><img src="4.1.1.png" alt="4.1.1"></p>
+<h3 id="4-2-wappalyzer-插件"><a href="#4-2-wappalyzer-插件" class="headerlink" title="4.2.wappalyzer 插件"></a>4.2.wappalyzer 插件</h3><p><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/wappalyzer/gppongmhjkpfnbhagpmjfkannfbllamg?utm_source=chrome-ntp-icon">https://chrome.google.com/webstore/detail/wappalyzer/gppongmhjkpfnbhagpmjfkannfbllamg?utm_source=chrome-ntp-icon</a></p>
+<p><img src="4.2.1.png" alt="4.2.1"></p>
+<p>像我老师网站，信息直接全部暴露~（主要是他的博客是我见过wappalyzer 识别信息最全的….wappalyzer 插件针对国内cms有点水土不服)</p>
+<p>顺便给他项目打个广告：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/zhblue/hustoj">https://github.com/zhblue/hustoj</a></p>
+<h3 id="4-3-佩恩平台识别"><a href="#4-3-佩恩平台识别" class="headerlink" title="4.3 佩恩平台识别"></a>4.3 佩恩平台识别</h3><p>需要投稿四篇才有初级使用权限….</p>
+<p>不足四篇也可以搜索别人搜索过的资产，例如baidu.com。这个信息收集绝对是最全的……</p>
+<p><img src="4.3.1.png" alt="4.3.1"></p>
+<h3 id="4-4-潮汐指纹识别"><a href="#4-4-潮汐指纹识别" class="headerlink" title="4.4 潮汐指纹识别"></a>4.4 潮汐指纹识别</h3><p><a target="_blank" rel="noopener" href="http://finger.tidesec.net/">http://finger.tidesec.net/</a></p>
+<h3 id="4-5-whatweb"><a href="#4-5-whatweb" class="headerlink" title="4.5 whatweb"></a>4.5 whatweb</h3><p><img src="4.5.1.png" alt="4.5.1"></p>
+<p>whatweb对国外cms，如：wordpress，joomla等国外cms识别效果还是不错的。但是遇到国内的cms，如tp框架，dz等cms效果就不好了…</p>
+<h2 id="4-6-cms信息的利用"><a href="#4-6-cms信息的利用" class="headerlink" title="4.6 cms信息的利用"></a>4.6 cms信息的利用</h2><p>识别了cms，快速找出对应cms的爆发过的漏洞，进行验证</p>
+<p>快速找出cms漏洞方法有：</p>
+<ul>
+<li>零组知识库查找</li>
+<li>cnvd 国家信息安全共享平台查找</li>
+<li>cve搜索</li>
+<li>知识库搜索</li>
+</ul>
+<h3 id="4-6-1零组知识库信息"><a href="#4-6-1零组知识库信息" class="headerlink" title="4.6.1零组知识库信息"></a>4.6.1零组知识库信息</h3><p>基本所有公开的cms漏洞，利用方式都能从这里找到。</p>
+<p>网站：<a target="_blank" rel="noopener" href="https://wiki.0-sec.org/#/md%EF%BC%88%E9%9C%80%E8%A6%81%E9%82%80%E8%AF%B7%E7%A0%81%EF%BC%8C%E6%88%91%E8%BF%98%E6%9C%89%E4%B8%80%E6%9E%9A...%EF%BC%89">https://wiki.0-sec.org/#/md（需要邀请码，我还有一枚...）</a></p>
+<p><img src="4.6.1.1.png" alt="4.6.1.1"></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="4-6-2-cnvd查找cms漏洞"><a href="#4-6-2-cnvd查找cms漏洞" class="headerlink" title="4.6.2 cnvd查找cms漏洞"></a>4.6.2 cnvd查找cms漏洞</h3><p><a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/flaw/list.htm?flag=true">https://www.cnvd.org.cn/flaw/list.htm?flag=true</a></p>
+<p><img src="4.6.2.1.png" alt="4.6.2.1"></p>
+<h3 id="4-6-3-相关cve搜索"><a href="#4-6-3-相关cve搜索" class="headerlink" title="4.6.3 相关cve搜索"></a>4.6.3 相关cve搜索</h3><p><a target="_blank" rel="noopener" href="https://cve.mitre.org/cve/search_cve_list.html">https://cve.mitre.org/cve/search_cve_list.html</a></p>
+<p><img src="4.6.3.1.png" alt="4.6.3.1"></p>
+<h3 id="4-6-4-安恒知识库搜索"><a href="#4-6-4-安恒知识库搜索" class="headerlink" title="4.6.4 安恒知识库搜索"></a>4.6.4 安恒知识库搜索</h3><p>大佬们写了几千篇文章，基本什么类型的cms，都有：</p>
+<p><a target="_blank" rel="noopener" href="http://greatagain.dbappsecurity.com.cn/#/book?id=1072&amp;type_id=1">http://greatagain.dbappsecurity.com.cn/#/book?id=1072&amp;type_id=1</a></p>
+<p><img src="4.6.4.1.png" alt="4.6.4.1"></p>
+<h1 id="5-路径敏感信息收集"><a href="#5-路径敏感信息收集" class="headerlink" title="5. 路径敏感信息收集"></a>5. 路径敏感信息收集</h1><p>路径扫描主要靠工具收集。常用的有工具有：</p>
+<ul>
+<li>awvs13 爬虫，爬取路径</li>
+<li>dirbuster</li>
+<li>dirsearch (后面课程会讲到这个工具)</li>
+<li>御剑</li>
+<li>javascript文件中的链接提取（真的好用）</li>
+</ul>
+<h3 id="5-1-awvs13爬虫探测"><a href="#5-1-awvs13爬虫探测" class="headerlink" title="5.1 awvs13爬虫探测"></a>5.1 awvs13爬虫探测</h3><h3 id="5-2-dirbuster"><a href="#5-2-dirbuster" class="headerlink" title="5.2 dirbuster"></a>5.2 dirbuster</h3><p><img src="5.2.1.png" alt="5.2.1"></p>
+<p>dirbuster比较好的点就是能够可视化的看到，爆破出来的路径，还可以自由勾选要枚举的路径，还有设置代理之类的功能，总体还是蛮好用的。</p>
+<p>爆破结果：</p>
+<p><img src="5.2.2.png" alt="5.2.2"></p>
+<h3 id="5-3-dirsearch-后面课程要用…"><a href="#5-3-dirsearch-后面课程要用…" class="headerlink" title="5.3 dirsearch(后面课程要用…)"></a>5.3 dirsearch(后面课程要用…)</h3><p><a target="_blank" rel="noopener" href="https://github.com/maurosoria/dirsearch">https://github.com/maurosoria/dirsearch</a></p>
+<p>因为是国外的工具，自带的字典在国内都不太好用，可以根据该文章修改一下字典：<a target="_blank" rel="noopener" href="https://dfkan.com/1469.html">https://dfkan.com/1469.html</a></p>
+<p>简单爆破一下路径:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://www.hustoj.com/ -e php</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-4-御剑（上古级神器了，线程一开大，就容易卡死…"><a href="#5-4-御剑（上古级神器了，线程一开大，就容易卡死…" class="headerlink" title="5.4 御剑（上古级神器了，线程一开大，就容易卡死…)"></a>5.4 御剑（上古级神器了，线程一开大，就容易卡死…)</h3><p><img src="5.4.1.png" alt="5.4.1"></p>
+<p>也不支持代理，简单了解即可…</p>
+<h3 id="5-5-javascript文件中的链接提取（真的好用）"><a href="#5-5-javascript文件中的链接提取（真的好用）" class="headerlink" title="5.5 javascript文件中的链接提取（真的好用）"></a>5.5 javascript文件中的链接提取（真的好用）</h3><p><strong>jsfinder提取url:</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Threezh1/JSFinder">https://github.com/Threezh1/JSFinder</a></p>
+<p>该工具能够爬取指定网站中所有的js文件，并查找其中的路径</p>
+<p><img src="5.5.1.png" alt="5.5.1"></p>
+<p><strong>LinkFinder 提取节点</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GerbenJavado/LinkFinder">https://github.com/GerbenJavado/LinkFinder</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 linkfinder.py -i http://www.hustoj.com/ -d -o test.html</span><br></pre></td></tr></table></figure>
+
+<p>提取效果还是不错的。</p>
+<p><img src="5.5.2.png" alt="5.5.2"></p>
+<h1 id="6-搜索引擎敏感信息收集"><a href="#6-搜索引擎敏感信息收集" class="headerlink" title="6.搜索引擎敏感信息收集"></a>6.搜索引擎敏感信息收集</h1><p>搜索引擎在使用特定语法时能够，收集到很多敏感信息</p>
+<h3 id="6-1-googlehacking"><a href="#6-1-googlehacking" class="headerlink" title="6.1 googlehacking"></a>6.1 googlehacking</h3><p>这里因为篇幅问题主要记录google搜索语法。在很多时候使用 百度，必应也有意想不到的效果。</p>
+<p><strong>site: 限制域名的搜索范围</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:baidu.com</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>inurl：用于搜索含有特定值的url</strong></p>
+<p>在搜索一些通用cms漏洞时特别好用。cms通用漏洞，url都是固定的，直接搜索很容易找到。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inurl:/phpinfo.php</span><br></pre></td></tr></table></figure>
+
+<p>也可用来发现后台：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:域名 inurl:login|admin|manage|member|admin_login|login_admin|system|login|user|main|cms</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>intext：搜索网页中包含的文字（忽略，title，url等）</strong></p>
+<p>intext主要用来配合site，搜索指定网站中存在的敏感信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:域名 intext:管理|后台|登陆|用户名|密码|验证码|系统|帐号|admin|login|sys|managetem|password|username</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>filetype：搜索文件的后缀或者扩展名</strong></p>
+<p>filetype常用来和site组合使用，通过添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:cuz.edu.cn filetype:xls</span><br></pre></td></tr></table></figure>
+
+<p>收获一堆学号用户名….淦，可怜的文学院。</p>
+<p><img src="6.1.1.png" alt="6.1.1"></p>
+<p>常搜索的后缀：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xls|txt|docx|pptx|pdf|sql|mdb|zip|rar</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>intitle：搜索指定的title标题</strong></p>
+<p>intitle常用来搜索诸如，后台|login|管理 之类的关键字，可用来快速发现后台系统。</p>
+<p>常用关键字：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">管理|login|后台|登陆|注册|register|admin|等</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>link：搜索包含了某个指定url的页面列表</strong></p>
+<p>link可以用来收集子域名，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:baidu.com link:baidu.com -www</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-1-7-常用搜索组合："><a href="#6-1-7-常用搜索组合：" class="headerlink" title="6.1.7 常用搜索组合："></a>6.1.7 常用搜索组合：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">查找后台地址：site:域名 inurl:login|admin|manage|member|admin_login|login_admin|system|login|user|main|cms</span><br><span class="line"></span><br><span class="line">查找文本内容：site:域名 intext:管理|后台|登陆|用户名|密码|验证码|系统|帐号|admin|login|sys|managetem|password|username</span><br><span class="line"></span><br><span class="line">查找可注入点：site:域名 inurl:aspx|jsp|php|asp</span><br><span class="line"></span><br><span class="line">查找上传漏洞：site:域名 inurl:file|load|editor|Files</span><br><span class="line"></span><br><span class="line">找eweb编辑器：site:域名 inurl:ewebeditor|editor|uploadfile|eweb|edit</span><br><span class="line"></span><br><span class="line">存在的数据库：site:域名 filetype:mdb|asp|#</span><br><span class="line"></span><br><span class="line">查看脚本类型：site:域名 filetype:asp/aspx/php/jsp</span><br><span class="line"></span><br><span class="line">迂回策略入侵：inurl:cms/data/templates/images/index/</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="6-1-8-各种敏感数据收集："><a href="#6-1-8-各种敏感数据收集：" class="headerlink" title="6.1.8 各种敏感数据收集："></a>6.1.8 各种敏感数据收集：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">filetyle:xls inurl:gov username password</span><br><span class="line"></span><br><span class="line">inurl:phpmyadmin/main.php intitle:phpmyadmin</span><br><span class="line"></span><br><span class="line">filetype:inc inurl:config.inc host</span><br><span class="line"></span><br><span class="line">filetype:sql cdb_members inurl:forumdata</span><br><span class="line"></span><br><span class="line">filetype:txt inurl:&quot;新建文本文档.txt&quot;密码</span><br><span class="line"></span><br><span class="line">inurl:phpinfo.php intitle:&quot;phpinfo()&quot;&quot;PHP Version&quot;+&quot;Server API&quot;</span><br><span class="line"></span><br><span class="line">filetype:log inurl:log mdb</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-2-网盘信息搜索（这个很强）"><a href="#6-2-网盘信息搜索（这个很强）" class="headerlink" title="6.2 网盘信息搜索（这个很强）"></a>6.2 网盘信息搜索（这个很强）</h3><p>网盘搜索网上没看到有多少人提，第一次知道还是来自安恒一个师傅教的，亲自看大佬，信息收集进某高校内网。</p>
+<p>因为某度网盘的广泛使用，网盘中可能会存储很多敏感信息。</p>
+<p>这里主要使用凌风云搜索：<a target="_blank" rel="noopener" href="https://www.lingfengyun.com/">https://www.lingfengyun.com/</a></p>
+<p>成堆的学号，用户名….恐怖如斯好吧…</p>
+<p><img src="6.2.1.png" alt="6.2.1"></p>
+<p>其他的网盘搜索 引擎：<a target="_blank" rel="noopener" href="https://www.chaonengsou.com/%E3%80%82%E8%BF%99%E4%B8%AA%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%B9%9F%E5%B0%B1%E6%98%AFiframe%E5%B5%8C%E5%A5%97%E4%BA%86%E5%85%B6%E4%BB%96%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%B0%9D%E8%AF%95%E4%B8%80%E4%B8%8B%E3%80%82%E5%8F%8D%E6%AD%A3%E5%87%8C%E9%A3%8E%E4%BA%91%F0%9F%90%AE%F0%9F%8D%BA%E3%80%82">https://www.chaonengsou.com/。这个搜索引擎也就是iframe嵌套了其他搜索引擎，也可以尝试一下。反正凌风云🐮🍺。</a></p>
+<h1 id="7-github信息收集"><a href="#7-github信息收集" class="headerlink" title="7. github信息收集"></a>7. github信息收集</h1><p>很多程序员，会将自己为企业开发的代码直接上传到github。代码中的，敏感信息，配置文件等都没有更改。攻击者很容易就可以通过，域名，作者id等信息在github搜索到源码。</p>
+<h3 id="7-1-github常用语法"><a href="#7-1-github常用语法" class="headerlink" title="7.1 github常用语法"></a>7.1 github常用语法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">in:name  test              #仓库标题搜索含有关键字 test</span><br><span class="line">in:descripton test         #仓库描述搜索含有关键字</span><br><span class="line">in:readme test             #Readme文件搜素含有关键字</span><br></pre></td></tr></table></figure>
+
+<p>尝试搜索一下赵师傅的项目：</p>
+<p>in:name glzjin</p>
+<p><img src="7.1.1.png" alt="7.1.1"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user:ccjpp       #搜索指定用户名的所有代码</span><br></pre></td></tr></table></figure>
+
+<p><img src="7.1.2.png" alt="7.1.2"></p>
+<p>写过的所有渣代码暴露….</p>
+<h3 id="7-2-搜索敏感信息"><a href="#7-2-搜索敏感信息" class="headerlink" title="7.2 搜索敏感信息"></a>7.2 搜索敏感信息</h3><p>这篇文章总结的很好：<a target="_blank" rel="noopener" href="https://www.onebug.org/websafe/75924.html">信息收集之Github搜索语法</a></p>
+<p>简单演示：</p>
+<p>随便尝试一下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:qq.com String password smtp</span><br></pre></td></tr></table></figure>
+
+<p><img src="7.2.1.png" alt="7.2.1"></p>
+<p>一个信息收集工具：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7229">GitHub敏感信息采集工具GSIL</a></p>
+<h1 id="8-dns信息收集"><a href="#8-dns信息收集" class="headerlink" title="8. dns信息收集"></a>8. dns信息收集</h1><p>没试过dns信息收集，不会</p>
+<h2 id="TODO-2"><a href="#TODO-2" class="headerlink" title="TODO"></a>TODO</h2><p>可以参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/70ecbbcb52ac">渗透时常用的DNS信息收集</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/110404620">https://zhuanlan.zhihu.com/p/110404620</a></p>
+<h1 id="9-邮件信息收集"><a href="#9-邮件信息收集" class="headerlink" title="9. 邮件信息收集"></a>9. 邮件信息收集</h1><p>找邮件，目前只知道whois查询，网页中提取含有邮箱格式（xxx@xxx格式）的参数，或者google，github信息收集也许也能收集到。</p>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/83b2fdf71e4c">收集的一些谷歌黑客语法</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">h11ba1</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/07/05/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">http://example.com/2019/07/05/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">h11ba1's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></div><div class="post_share"><div class="social-share" data-image="/2019/07/05/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/07/05/xray%20poc%E7%BC%96%E5%86%99%E5%AD%A6%E4%B9%A0/"><img class="prev-cover" src="/2019/07/05/xray%20poc%E7%BC%96%E5%86%99%E5%AD%A6%E4%B9%A0/index.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">xray poc编写学习</div></div></a></div><div class="next-post pull-right"><a href="/2019/07/05/wireshark%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%AE%9E%E5%88%97%E8%AE%B2%E8%A7%A3/"><img class="next-cover" src="/2019/07/05/wireshark%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%AE%9E%E5%88%97%E8%AE%B2%E8%A7%A3/index.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">wireshark使用</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">h11ba1</div><div class="author-info__description">网络安全爱好者，一个正直的白帽子</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/h1iba1"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/h1iba1" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:h11ba1@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">好好学习</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-whois%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.</span> <span class="toc-text">1. whois查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9C%A8%E7%BA%BF%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.1 在线查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%B7%A5%E5%85%B7%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.0.2.</span> <span class="toc-text">1.2 工具查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%94%B6%E9%9B%86%E4%BF%A1%E6%81%AF%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-number">1.0.3.</span> <span class="toc-text">1.3 收集信息的利用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">2.子域名收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E5%B7%A5%E5%85%B7%E6%94%B6%E9%9B%86"><span class="toc-number">2.0.1.</span> <span class="toc-text">2.1工具收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AF%AD%E6%B3%95%E6%90%9C%E7%B4%A2%E5%AD%90%E5%9F%9F%E5%90%8D"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.2 搜索引擎语法搜索子域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%A9%BA%E9%97%B4%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%90%9C%E7%B4%A2"><span class="toc-number">2.0.3.</span> <span class="toc-text">2.3 空间搜索引擎搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%94%B6%E9%9B%86%E5%AD%90%E5%9F%9F%E5%90%8D%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-number">2.0.4.</span> <span class="toc-text">2.4 收集子域名的利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TODO"><span class="toc-number">2.0.5.</span> <span class="toc-text">TODO</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%9C%9F%E5%AE%9Eip%E5%8F%91%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">3. 真实ip发现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TODO-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">TODO</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-cms%EF%BC%8C%E4%B8%AD%E9%97%B4%E4%BB%B6%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">4.</span> <span class="toc-text">4. cms，中间件信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E4%BA%91%E6%82%89%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB"><span class="toc-number">4.0.1.</span> <span class="toc-text">4.1.云悉指纹识别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-wappalyzer-%E6%8F%92%E4%BB%B6"><span class="toc-number">4.0.2.</span> <span class="toc-text">4.2.wappalyzer 插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E4%BD%A9%E6%81%A9%E5%B9%B3%E5%8F%B0%E8%AF%86%E5%88%AB"><span class="toc-number">4.0.3.</span> <span class="toc-text">4.3 佩恩平台识别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E6%BD%AE%E6%B1%90%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB"><span class="toc-number">4.0.4.</span> <span class="toc-text">4.4 潮汐指纹识别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-whatweb"><span class="toc-number">4.0.5.</span> <span class="toc-text">4.5 whatweb</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-cms%E4%BF%A1%E6%81%AF%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-number">4.1.</span> <span class="toc-text">4.6 cms信息的利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-1%E9%9B%B6%E7%BB%84%E7%9F%A5%E8%AF%86%E5%BA%93%E4%BF%A1%E6%81%AF"><span class="toc-number">4.1.1.</span> <span class="toc-text">4.6.1零组知识库信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-2-cnvd%E6%9F%A5%E6%89%BEcms%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.1.3.</span> <span class="toc-text">4.6.2 cnvd查找cms漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-3-%E7%9B%B8%E5%85%B3cve%E6%90%9C%E7%B4%A2"><span class="toc-number">4.1.4.</span> <span class="toc-text">4.6.3 相关cve搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-4-%E5%AE%89%E6%81%92%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%9C%E7%B4%A2"><span class="toc-number">4.1.5.</span> <span class="toc-text">4.6.4 安恒知识库搜索</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E8%B7%AF%E5%BE%84%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">5.</span> <span class="toc-text">5. 路径敏感信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-awvs13%E7%88%AC%E8%99%AB%E6%8E%A2%E6%B5%8B"><span class="toc-number">5.0.1.</span> <span class="toc-text">5.1 awvs13爬虫探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-dirbuster"><span class="toc-number">5.0.2.</span> <span class="toc-text">5.2 dirbuster</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-dirsearch-%E5%90%8E%E9%9D%A2%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%94%A8%E2%80%A6"><span class="toc-number">5.0.3.</span> <span class="toc-text">5.3 dirsearch(后面课程要用…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E5%BE%A1%E5%89%91%EF%BC%88%E4%B8%8A%E5%8F%A4%E7%BA%A7%E7%A5%9E%E5%99%A8%E4%BA%86%EF%BC%8C%E7%BA%BF%E7%A8%8B%E4%B8%80%E5%BC%80%E5%A4%A7%EF%BC%8C%E5%B0%B1%E5%AE%B9%E6%98%93%E5%8D%A1%E6%AD%BB%E2%80%A6"><span class="toc-number">5.0.4.</span> <span class="toc-text">5.4 御剑（上古级神器了，线程一开大，就容易卡死…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-javascript%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E9%93%BE%E6%8E%A5%E6%8F%90%E5%8F%96%EF%BC%88%E7%9C%9F%E7%9A%84%E5%A5%BD%E7%94%A8%EF%BC%89"><span class="toc-number">5.0.5.</span> <span class="toc-text">5.5 javascript文件中的链接提取（真的好用）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">6.</span> <span class="toc-text">6.搜索引擎敏感信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-googlehacking"><span class="toc-number">6.0.1.</span> <span class="toc-text">6.1 googlehacking</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-7-%E5%B8%B8%E7%94%A8%E6%90%9C%E7%B4%A2%E7%BB%84%E5%90%88%EF%BC%9A"><span class="toc-number">6.0.1.1.</span> <span class="toc-text">6.1.7 常用搜索组合：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-8-%E5%90%84%E7%A7%8D%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%EF%BC%9A"><span class="toc-number">6.0.1.2.</span> <span class="toc-text">6.1.8 各种敏感数据收集：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E7%BD%91%E7%9B%98%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2%EF%BC%88%E8%BF%99%E4%B8%AA%E5%BE%88%E5%BC%BA%EF%BC%89"><span class="toc-number">6.0.2.</span> <span class="toc-text">6.2 网盘信息搜索（这个很强）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-github%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">7.</span> <span class="toc-text">7. github信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-github%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="toc-number">7.0.1.</span> <span class="toc-text">7.1 github常用语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E6%90%9C%E7%B4%A2%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF"><span class="toc-number">7.0.2.</span> <span class="toc-text">7.2 搜索敏感信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-dns%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">8.</span> <span class="toc-text">8. dns信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO-2"><span class="toc-number">8.1.</span> <span class="toc-text">TODO</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-%E9%82%AE%E4%BB%B6%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">9.</span> <span class="toc-text">9. 邮件信息收集</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/" title="arl_poc编写"><img src="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="arl_poc编写"/></a><div class="content"><a class="title" href="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/" title="arl_poc编写">arl_poc编写</a><time datetime="2021-07-01T13:04:49.000Z" title="发表于 2021-07-01 21:04:49">2021-07-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/" title="hugo+github page搭建自定义域名的https博客"><img src="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hugo+github page搭建自定义域名的https博客"/></a><div class="content"><a class="title" href="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/" title="hugo+github page搭建自定义域名的https博客">hugo+github page搭建自定义域名的https博客</a><time datetime="2021-06-05T13:04:49.000Z" title="发表于 2021-06-05 21:04:49">2021-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/" title="1.webgoat环境构建"><img src="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="1.webgoat环境构建"/></a><div class="content"><a class="title" href="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/" title="1.webgoat环境构建">1.webgoat环境构建</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="3.sql注入模块审计"><img src="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3.sql注入模块审计"/></a><div class="content"><a class="title" href="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="3.sql注入模块审计">3.sql注入模块审计</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="2.登录注册模块审计"><img src="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/index.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.登录注册模块审计"/></a><div class="content"><a class="title" href="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="2.登录注册模块审计">2.登录注册模块审计</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> h11ba1</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9RpBEBK73wLE1cR6CXCiAnjb-gzGzoHsz',
+      appKey: 'e737ft98xMdDGv5szsTCmX7i',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script data-pjax src="https://cdn.jsdelivr.net/gh/tzy13755126023/tzy13755126023.github.io/js/chocolate.js"></script> <script async src="https://cdn.jsdelivr.net/gh/tzy13755126023/tzy13755126023.github.io/js/cursor.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

