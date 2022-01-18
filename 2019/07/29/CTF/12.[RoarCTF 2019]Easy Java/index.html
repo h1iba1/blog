@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light /dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>12.[RoarCTF 2019]Easy Java | h11ba1's blog</title><meta name="keywords" content="CTF"><meta name="author" content="h11ba1"><meta name="copyright" content="h11ba1"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="考察知识点： 1.Java 任意文件读取 2. java配置文件web.xml读取 1.访问help  2. 感觉是文件读取，改为post请求  3. 尝试读取java的配置文件 找到flag文件所在位置  4.尝试读取flag文件 java编译的class文件存放在classes文件下： 然后访问flag，因为时目录，所以需要将.换位&#x2F; 所以访问：  &#x2F;Download?filename&#x3D;WEB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12.[RoarCTF 2019]Easy Java">
+<meta property="og:url" content="http://example.com/2019/07/29/CTF/12.[RoarCTF%202019]Easy%20Java/index.html">
+<meta property="og:site_name" content="h11ba1&#39;s blog">
+<meta property="og:description" content="考察知识点： 1.Java 任意文件读取 2. java配置文件web.xml读取 1.访问help  2. 感觉是文件读取，改为post请求  3. 尝试读取java的配置文件 找到flag文件所在位置  4.尝试读取flag文件 java编译的class文件存放在classes文件下： 然后访问flag，因为时目录，所以需要将.换位&#x2F; 所以访问：  &#x2F;Download?filename&#x3D;WEB">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/top_img/index.jpg">
+<meta property="article:published_time" content="2019-07-29T09:15:53.000Z">
+<meta property="article:modified_time" content="2022-01-18T17:02:22.138Z">
+<meta property="article:author" content="h11ba1">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/top_img/index.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/07/29/CTF/12.[RoarCTF%202019]Easy%20Java/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '12.[RoarCTF 2019]Easy Java',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-01-19 01:02:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="h11ba1's blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></li><li><a class="site-page child" href="/bangumis"><i class="fa-fw bangumis"></i><span> 番剧</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top_img/index.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">h11ba1's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友情连接</span></a></li><li><a class="site-page child" href="/bangumis"><i class="fa-fw bangumis"></i><span> 番剧</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">12.[RoarCTF 2019]Easy Java</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-07-29T09:15:53.000Z" title="发表于 2019-07-29 17:15:53">2019-07-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-18T17:02:22.138Z" title="更新于 2022-01-19 01:02:22">2022-01-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CTF/">CTF</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="12.[RoarCTF 2019]Easy Java"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>考察知识点：</strong></p>
+<p><strong>1.Java 任意文件读取</strong></p>
+<p><strong>2. java配置文件web.xml读取</strong></p>
+<p><strong>1.访问help</strong></p>
+<p><img src="1.png" alt="1"></p>
+<p><strong>2. 感觉是文件读取，改为post请求</strong></p>
+<p><img src="2.png" alt="2"></p>
+<p><strong>3. 尝试读取java的配置文件</strong></p>
+<p>找到flag文件所在位置</p>
+<p><img src="3.png" alt="3"></p>
+<p><strong>4.尝试读取flag文件</strong></p>
+<p>java编译的class文件存放在classes文件下：</p>
+<p>然后访问flag，因为时目录，所以需要将.换位/</p>
+<p>所以访问：</p>
+<p> /Download?filename=WEB-INF/classes/com/wm/ctf/FlagController.class</p>
+<p><img src="4.png" alt="4"></p>
+<p>base64解码即可得到flag</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">h11ba1</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/07/29/CTF/12.[RoarCTF%202019]Easy%20Java/">http://example.com/2019/07/29/CTF/12.[RoarCTF%202019]Easy%20Java/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">h11ba1's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a></div><div class="post_share"><div class="social-share" data-image="/img/top_img/index.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="/img/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/07/29/CTF/13.%5B0CTF%202016%5Dpiapiapia/"><img class="prev-cover" src="/img/top_img/index.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">13.[0CTF 2016]piapiapia</div></div></a></div><div class="next-post pull-right"><a href="/2019/07/28/CTF/11.%5B%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98%202019%5Deasysql/"><img class="next-cover" src="/img/top_img/index.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">11.[极客大挑战 2019]easysql</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2019/07/24/CTF/3.easy_tornado/3.easy_tornado/" title="3.easy_tornado"><img class="cover" src="/img/top_img/index.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-24</div><div class="title">3.easy_tornado</div></div></a></div><div><a href="/2019/07/24/CTF/5.[SUCTF 2019]EasySQL/5.[SUCTF 2019]EasySQL/" title="5.[SUCTF 2019]EasySQL"><img class="cover" src="/img/top_img/index.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-24</div><div class="title">5.[SUCTF 2019]EasySQL</div></div></a></div><div><a href="/2019/07/24/CTF/1.[HCTF 2018]WarmUp/1.[HCTF 2018]WarmUp/" title="1.[HCTF 2018]WarmUp"><img class="cover" src="/img/top_img/index.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-24</div><div class="title">1.[HCTF 2018]WarmUp</div></div></a></div><div><a href="/2019/07/24/CTF/2.[强网杯 2019]随便注/2.[强网杯 2019]随便注/" title="2.[强网杯 2019]随便注"><img class="cover" src="/img/top_img/index.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-24</div><div class="title">2.[强网杯 2019]随便注</div></div></a></div><div><a href="/2019/07/24/CTF/6.[HCTF 2018]admin/6.[HCTF 2018]admin/" title="6.[HCTF 2018]admin."><img class="cover" src="/img/top_img/index.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-24</div><div class="title">6.[HCTF 2018]admin.</div></div></a></div><div><a href="/2019/07/27/CTF/10.[网鼎杯 2018]Fakebook/" title="10.[网鼎杯 2018]Fakebook"><img class="cover" src="/img/top_img/index.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-07-27</div><div class="title">10.[网鼎杯 2018]Fakebook</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">h11ba1</div><div class="author-info__description">努力学习安全开发的蒟蒻</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">47</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/h1iba1"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/h1iba1" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:h11ba1@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">好好学习</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/01/11/xsstrike%E6%BA%90%E7%A0%81%E8%B5%8F%E6%9E%90/" title="xsstrike源码赏析"><img src="/2022/01/11/xsstrike%E6%BA%90%E7%A0%81%E8%B5%8F%E6%9E%90/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="xsstrike源码赏析"/></a><div class="content"><a class="title" href="/2022/01/11/xsstrike%E6%BA%90%E7%A0%81%E8%B5%8F%E6%9E%90/" title="xsstrike源码赏析">xsstrike源码赏析</a><time datetime="2022-01-11T13:04:49.000Z" title="发表于 2022-01-11 21:04:49">2022-01-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/29/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E5%8F%8A%E6%89%A9%E5%B1%95/" title="fastjson反序列化漏洞原理及扩展"><img src="/2021/08/29/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E5%8F%8A%E6%89%A9%E5%B1%95/31.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="fastjson反序列化漏洞原理及扩展"/></a><div class="content"><a class="title" href="/2021/08/29/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E5%8F%8A%E6%89%A9%E5%B1%95/" title="fastjson反序列化漏洞原理及扩展">fastjson反序列化漏洞原理及扩展</a><time datetime="2021-08-29T10:05:49.000Z" title="发表于 2021-08-29 18:05:49">2021-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/25/java%E7%B3%BB%E7%BB%9F%E9%AA%8C%E8%AF%81%E7%A0%B4%E8%A7%A3/" title="jar包修改绕过系统license验证"><img src="/2021/08/25/java%E7%B3%BB%E7%BB%9F%E9%AA%8C%E8%AF%81%E7%A0%B4%E8%A7%A3/index.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="jar包修改绕过系统license验证"/></a><div class="content"><a class="title" href="/2021/08/25/java%E7%B3%BB%E7%BB%9F%E9%AA%8C%E8%AF%81%E7%A0%B4%E8%A7%A3/" title="jar包修改绕过系统license验证">jar包修改绕过系统license验证</a><time datetime="2021-08-25T02:05:49.000Z" title="发表于 2021-08-25 10:05:49">2021-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/10/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/s2-005%E5%A4%8D%E7%8E%B0%E5%88%86%E6%9E%90/" title="s2-005复现分析"><img src="/2021/08/10/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/s2-005%E5%A4%8D%E7%8E%B0%E5%88%86%E6%9E%90/index.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="s2-005复现分析"/></a><div class="content"><a class="title" href="/2021/08/10/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/s2-005%E5%A4%8D%E7%8E%B0%E5%88%86%E6%9E%90/" title="s2-005复现分析">s2-005复现分析</a><time datetime="2021-08-10T13:05:49.000Z" title="发表于 2021-08-10 21:05:49">2021-08-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/08/10/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/s2-001%E5%A4%8D%E7%8E%B0%E5%88%86%E6%9E%90/" title="s2-001复现分析"><img src="/2021/08/10/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/s2-001%E5%A4%8D%E7%8E%B0%E5%88%86%E6%9E%90/index.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="s2-001复现分析"/></a><div class="content"><a class="title" href="/2021/08/10/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/s2-001%E5%A4%8D%E7%8E%B0%E5%88%86%E6%9E%90/" title="s2-001复现分析">s2-001复现分析</a><time datetime="2021-08-10T13:05:49.000Z" title="发表于 2021-08-10 21:05:49">2021-08-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022  <i id="heartbeat" class="fa fas fa-heartbeat"></i> h11ba1</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/HCLonely/images@master/others/heartbeat.min.css"></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9RpBEBK73wLE1cR6CXCiAnjb-gzGzoHsz',
+      appKey: 'e737ft98xMdDGv5szsTCmX7i',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script data-pjax src="https://cdn.jsdelivr.net/gh/tzy13755126023/tzy13755126023.github.io/js/chocolate.js"></script> <script async src="https://cdn.jsdelivr.net/gh/tzy13755126023/tzy13755126023.github.io/js/cursor.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
